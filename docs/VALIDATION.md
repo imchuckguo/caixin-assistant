@@ -23,3 +23,5 @@
 ## 发布复核
 
 公开文件仅含源码、测试使用的合成值、设计及部署文档、空凭据示例。实际 `.env`、SQLite 文件、日志、浏览器配置与本机备份目录均被排除。GitHub 工作流继续运行相同检查，远端结果在发布时单独核对。
+
+远端验证：公开仓库已创建；[GitHub Checks](https://github.com/imchuckguo/caixin-assistant/actions/runs/44695309151) 在提交 22982f6 上成功；[v0.1.0 Release](https://github.com/imchuckguo/caixin-assistant/releases/tag/v0.1.0) 已发布扩展 ZIP 与 SHA256SUMS。
