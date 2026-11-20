@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>采芯助手 · 团队协作</title>
+    <link rel="stylesheet" href="ui.css" />
+    <style>
+      .wrap {
+        max-width: 1120px;
+      }
+      .team-wide {
+        overflow: auto;
+      }
+      #invitationOutput {
+        font-family: ui-monospace, monospace;
+        font-size: 12px;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="head">
+      <img class="brand-mark" src="icons/128.png" alt="" />
+      <div>
+        <b>团队协作</b>
+        <div class="sub">采芯助手 · 只共享你选择的报价</div>
+      </div>
+    </header>
+    <main class="wrap">
+      <p id="message" class="dialog-status" role="status"></p>
+      <div id="connect">
+        <p class="notice">
+          团队服务需要自行部署。连接后，共享报价在扩展内加密，服务器仍能看到访问时间、成员标识和密文长度
+        </p>
+        <div class="grid">
+          <section class="card stack">
+            <h2>创建团队</h2>
+            <label class="f" for="endpoint">服务器地址</label
+            ><input
+              id="endpoint"
+              placeholder="https://team.example.com"
+              autocomplete="off"
+            /><label class="f" for="createToken">部署创建凭据</label
+            ><input id="createToken" type="password" autocomplete="off" /><label
+              class="f"
+              for="name"
+              >团队名称</label
+            ><input id="name" maxlength="40" /><label class="f" for="myName"
+              >你的昵称</label
+            ><input id="myName" maxlength="20" />
+            <p class="muted">
+              将向该服务器发送加密名称和部署创建凭据；不会自动上传历史报价
+            </p>
+            <button class="primary" id="create">授权并创建</button>
+          </section>
+          <section class="card stack">
+            <h2>加入同事的团队</h2>
+            <label class="f" for="invitation">粘贴邀请文本</label
+            ><textarea
+              id="invitation"
+              autocomplete="off"
+              spellcheck="false"
+            ></textarea
+            ><label class="f" for="joinName">你的昵称</label
+            ><input id="joinName" maxlength="20" />
+            <p class="muted">
+              邀请默认单次有效、24
+              小时过期。邀请包含团队解密密钥，请只交给需要读取报价的同事
+            </p>
+            <button class="primary" id="join">授权并加入</button>
+          </section>
+        </div>
+      </div>
+      <div id="connected" class="hidden">
+        <section class="card">
+          <div class="row">
+            <h2 id="teamTitle"></h2>
+            <button id="leave" class="danger">退出团队</button>
+          </div>
+          <p id="summary" class="muted"></p>
+          <div class="controls">
+            <button class="primary" id="sync">立即同步</button
+            ><button id="pause">暂停同步</button
+            ><button id="localLeave">仅断开本机</button>
+          </div>
+          <label class="check"
+            ><input
+              type="checkbox"
+              id="autoShare"
+            />自动共享此后新建的记录（不含备注）</label
+          >
+          <p class="muted">
+            退出或撤回无法抹除同事已经下载的资料。管理员退出将关闭整个团队
+          </p>
+        </section>
+        <div class="grid">
+          <section class="card">
+            <h2>团队成员</h2>
+            <ul id="members" class="team-list"></ul>
+          </section>
+          <section class="card" id="ownerBox">
+            <h2>邀请成员</h2>
+            <button id="invite">生成单次邀请</button
+            ><textarea
+              id="invitationOutput"
+              readonly
+              aria-label="新邀请文本"
+            ></textarea>
+            <p id="inviteExpiry" class="muted"></p>
+            <p class="muted">邀请包含解密密钥，通过你信任的渠道手动交给同事</p>
+            <ul id="invites" class="team-list"></ul>
+          </section>
+        </div>
+        <section class="card">
+          <h2>选择共享的记录</h2>
+          <p class="muted">
+            仅勾选的记录会进入共享队列，未勾选的记录继续保存在本机
+          </p>
+          <div class="controls">
+            <button id="share" class="primary">共享选中记录</button
+            ><button id="unshare">撤回选中记录</button
+            ><label class="check"
+              ><input type="checkbox" id="includeNote" />同时共享备注</label
+            >
+          </div>
+          <div class="team-wide">
+            <table class="team-table">
+              <thead>
+                <tr>
+                  <th>选择</th>
+                  <th>料号</th>
+                  <th>供应商</th>
+                  <th>报价</th>
+                  <th>状态</th>
+                </tr>
+              </thead>
+              <tbody id="records"></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="card hidden" id="conflictBox">
+          <h2>需要处理的版本冲突</h2>
+          <p class="muted">
+            本地报价已保留。选择保留远端，或用本地版本重新推送
+          </p>
+          <ul id="conflicts" class="team-list"></ul>
+        </section>
+      </div>
+      <footer class="footer">
+        <a href="records.html">询价记录本</a> ·
+        <a
+          href="https://github.com/imchuckguo/caixin-assistant"
+          target="_blank"
+          rel="noopener"
+          >部署说明与源码</a
+        >
+      </footer>
+    </main>
+    <script src="lib/team-crypto.js"></script>
+    <script src="team.js"></script>
+  </body>
+</html>

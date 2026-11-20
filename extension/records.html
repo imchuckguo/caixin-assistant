@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>采芯助手 · 询价记录本</title>
+    <link rel="stylesheet" href="ui.css" />
+    <style>
+      body {
+        background: #f5f7f6;
+      }
+      .wrap {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 16px 20px 40px;
+      }
+      .guide {
+        background: #edf6f2;
+        border: 1px solid #cbded5;
+        border-radius: 12px;
+        padding: 10px 14px;
+        margin-bottom: 12px;
+        color: #4a4f63;
+        line-height: 1.8;
+      }
+      .guide b.t {
+        color: #087558;
+      }
+      .bar {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+      }
+      .bar input[type="search"] {
+        width: 260px;
+      }
+      .grow {
+        flex: 1;
+      }
+      .cols label {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: #fff;
+        border: 1px solid #e3e5ee;
+        border-radius: 6px;
+        padding: 3px 8px;
+        cursor: pointer;
+      }
+      .cols input,
+      .bar input[type="checkbox"] {
+        width: auto;
+      }
+      .stats {
+        color: #5b6275;
+      }
+
+      .tbl {
+        background: #fff;
+        border: 1px solid #eceef4;
+        border-radius: 12px;
+        overflow: auto;
+        max-height: calc(100vh - 230px);
+      }
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+      th,
+      td {
+        padding: 3px 4px;
+        border-bottom: 1px solid #f0f1f6;
+        text-align: left;
+        vertical-align: middle;
+        white-space: nowrap;
+      }
+      th {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: #fafbff;
+        color: #5b6275;
+        font-weight: 600;
+        font-size: 12px;
+        padding: 8px 6px;
+        border-bottom: 1px solid #e6e8f0;
+      }
+      th.fill {
+        background: #fff8ec;
+        color: #9a5b00;
+      }
+      tbody tr:hover td {
+        background: #fbfbff;
+      }
+      td.time {
+        color: #657570;
+        font-size: 12px;
+        padding-left: 10px;
+      }
+
+      /* 格子：自动记录的看起来像普通文字，点一下就能改 */
+      td input,
+      td select {
+        border: 1px solid transparent;
+        border-radius: 6px;
+        padding: 4px 6px;
+        background: transparent;
+        min-width: 0;
+      }
+      td input:hover,
+      td select:hover {
+        border-color: #e3e5ee;
+      }
+      td input:focus,
+      td select:focus {
+        border-color: #087f68;
+        background: #fff;
+        box-shadow: 0 0 0 2px #e5f1eb;
+      }
+      td.auto input {
+        color: #172624;
+      }
+      td.pn input {
+        font-weight: 600;
+      }
+      td.fill input,
+      td.fill select {
+        border-color: #e6e8f0;
+        background: #fff;
+      }
+      .w-co {
+        width: 210px;
+      }
+      .w-qq {
+        width: 100px;
+      }
+      .w-pn {
+        width: 160px;
+      }
+      .w-br {
+        width: 100px;
+      }
+      .w-bt {
+        width: 80px;
+      }
+      .w-qty {
+        width: 76px;
+      }
+      .w-pr {
+        width: 84px;
+      }
+      .w-gd {
+        width: 92px;
+      }
+      .w-ld {
+        width: 76px;
+      }
+      .w-nt {
+        width: 160px;
+      }
+      .qqt {
+        display: inline-block;
+        font-size: 10px;
+        padding: 0 4px;
+        border-radius: 4px;
+        background: #eef0f4;
+        color: #5b6275;
+        margin-left: 2px;
+        vertical-align: middle;
+      }
+      .qqt.ent {
+        background: #e3f8ee;
+        color: #0f9a57;
+      }
+      .price {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+      }
+      .taxbtn {
+        padding: 3px 6px;
+        font-size: 12px;
+        border-radius: 6px;
+        line-height: 1.3;
+      }
+      .taxbtn.t0 {
+        color: #0f9a57;
+        border-color: #bfe8d2;
+        background: #f2fbf6;
+      }
+      .taxbtn.t1 {
+        color: #e05a00;
+        border-color: #f6d2b8;
+        background: #fff6ef;
+      }
+      .net {
+        font-size: 11px;
+        color: #657570;
+        padding-left: 6px;
+      }
+      .best-tag {
+        display: none;
+        font-size: 11px;
+        color: #fff;
+        background: #0f9a57;
+        border-radius: 4px;
+        padding: 0 5px;
+        margin-left: 2px;
+      }
+      tr.best .best-tag {
+        display: inline-block;
+      }
+      tr.best td.pricecell input {
+        color: #0f9a57;
+        font-weight: 600;
+      }
+
+      td.ops {
+        padding-right: 8px;
+      }
+      .ops button {
+        padding: 4px 9px;
+        font-size: 12px;
+        border-radius: 6px;
+      }
+      .ops .ok-btn {
+        color: #0f9a57;
+        border-color: #bfe8d2;
+        font-weight: 600;
+      }
+      .ops .del {
+        border-color: transparent;
+        color: #b0b5c3;
+        padding: 4px 6px;
+      }
+      .ops .del:hover {
+        color: #e5162b;
+        background: #fff1f2;
+      }
+      tr.valid td {
+        background: #effaf4 !important;
+      }
+      tr.valid .ok-btn {
+        background: #0f9a57;
+        color: #fff;
+        border-color: #0f9a57;
+      }
+      tr.flash td {
+        animation: flash 1s;
+      }
+      @keyframes flash {
+        from {
+          background: #fff3c4;
+        }
+      }
+
+      .empty {
+        text-align: center;
+        color: #657570;
+        padding: 60px 0;
+        background: #fff;
+        border: 1px solid #eceef4;
+        border-radius: 12px;
+      }
+      .more {
+        text-align: center;
+        padding: 10px;
+      }
+      #toast {
+        position: fixed;
+        left: 50%;
+        bottom: 28px;
+        transform: translateX(-50%);
+        background: #172624;
+        color: #fff;
+        padding: 8px 14px;
+        border-radius: 8px;
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.2s;
+        z-index: 9;
+      }
+      #toast.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      #toast a {
+        color: #b9a8ff;
+        margin-left: 10px;
+        cursor: pointer;
+      }
+      tr.ro td {
+        background: #fbfcff;
+      }
+      tr.ro input,
+      tr.ro select {
+        cursor: default;
+        color: #3b4152 !important;
+      }
+      tr.ro td.fill input,
+      tr.ro td.fill select {
+        border-color: transparent;
+        background: transparent;
+      }
+      tr.ro.valid td {
+        background: #f3fbf6 !important;
+      }
+      .who {
+        font-size: 12px;
+        padding: 1px 6px;
+        border-radius: 5px;
+        background: #eef2ff;
+        color: #3b4fd6;
+      }
+      .who.me {
+        background: #e3f8ee;
+        color: #0f9a57;
+      }
+      .okmark {
+        color: #0f9a57;
+        font-weight: 600;
+      }
+      .teambar {
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+      }
+      .saved {
+        color: #0f9a57;
+        font-size: 12px;
+        transition: opacity 0.4s;
+      }
+      html.embed .head {
+        display: none;
+      }
+      html.embed .wrap {
+        padding: 8px 12px 6px;
+        max-width: none;
+      }
+      html.embed .guide {
+        display: none;
+      }
+      html.embed .tbl {
+        max-height: calc(100vh - 112px);
+      }
+      html.embed .bar {
+        margin-bottom: 6px;
+      }
+      html.embed .cols label {
+        padding: 1px 7px;
+      }
+      .ops .del.armed {
+        background: #effaf4;
+        border-color: #bfe8d2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="head">
+      <b>采芯助手 · 询价记录本</b>
+      <div class="sub">料号、供应商与报价台账 · 团队共享由你开启</div>
+    </div>
+    <div class="wrap">
+      <details class="guide">
+        <summary>填写说明与键盘快捷键</summary>
+        <b class="t">怎么用？</b>
+        在 IC交易网或正能量网点对方的 QQ，这里会自动记下
+        <b>日期时间、公司名、QQ、型号、品牌、批次</b>。
+        对方报价后，直接在这一行填
+        <b style="color: #9a5b00"
+          >数量、价格（点按钮切换未税/含税，默认未税）、货品、货期</b
+        >，边填边自动保存。 确认有货就点
+        <b style="color: #0f9a57">✓</b> 标记为有效报价（这一行变绿）；<b
+          >清除</b
+        >
+        把填写的内容恢复默认，不删除这一行。<br />
+        回车 / Tab 跳到下一格，↑↓ 换行；在价格格里按回车 = 点
+        ✓。同一型号的有效报价里
+        <b style="color: #0f9a57">最低价</b> 会标出来（含税价按 ÷1.13
+        换算成未税再比较）。同一天同一家公司同一个型号，多次点 QQ 只记一行。
+      </details>
+
+      <div class="bar cols" id="cols">
+        <b>显示列：</b>
+        <label><input type="checkbox" data-col="time" /> 日期时间</label>
+        <label><input type="checkbox" data-col="company" /> 公司名</label>
+        <label><input type="checkbox" data-col="qq" /> QQ</label>
+        <label><input type="checkbox" data-col="brand" /> 品牌</label>
+        <label><input type="checkbox" data-col="batch" /> 批次</label>
+        <label><input type="checkbox" data-col="qty" /> 数量</label>
+        <label><input type="checkbox" data-col="price" /> 价格</label>
+        <label><input type="checkbox" data-col="goods" /> 货品</label>
+        <label><input type="checkbox" data-col="lead" /> 货期</label>
+        <label><input type="checkbox" data-col="note" /> 备注</label>
+        <label class="hidden"
+          ><input type="checkbox" data-col="by" /> 记录人</label
+        >
+        <span class="muted">（导出 CSV 时也只导出勾选的列）</span>
+      </div>
+      <div class="bar">
+        <input type="search" id="q" placeholder="搜索型号 / 公司 / QQ / 品牌" />
+        <span id="teamBar" class="hidden teambar"
+          ><select id="who" style="width: auto">
+            <option value="all">全部（我的 + 队友）</option>
+            <option value="mine">只看我的</option>
+            <option value="team">只看队友的</option>
+          </select>
+          <span id="teamInfo" class="muted"></span
+          ><button id="teamSync">⟳ 同步团队</button
+          ><button id="teamOpen">团队设置</button></span
+        >
+        <label><input type="checkbox" id="onlyValid" /> 只看有效报价</label>
+        <button id="add">＋ 新增一行</button>
+        <span class="saved" id="saved"></span>
+        <span class="grow"></span>
+        <span class="stats" id="stats"></span>
+        <button id="export">导出 CSV（Excel 可打开）</button>
+        <button id="backup">备份 JSON</button
+        ><button id="importBtn">导入 CSV / JSON</button
+        ><input
+          id="importFile"
+          type="file"
+          accept=".csv,.json"
+          class="hidden"
+        />
+        <button id="clear">清空并撤回</button>
+      </div>
+      <div id="list"></div>
+    </div>
+    <div id="toast"></div>
+    <script src="lib/record.js"></script>
+    <script src="lib/backup.js"></script>
+    <script src="records.js"></script>
+  </body>
+</html>

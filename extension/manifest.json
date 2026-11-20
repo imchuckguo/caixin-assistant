@@ -1,0 +1,118 @@
+{
+  "manifest_version": 3,
+  "name": "采芯助手",
+  "version": "0.1.0",
+  "description": "料号比价、询价台账、库存监控与自部署加密团队协作。默认本地使用，团队共享需主动开启。",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "48": "icons/48.png"
+    },
+    "default_title": "采芯助手"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "storage",
+    "alarms",
+    "contextMenus",
+    "clipboardWrite",
+    "notifications"
+  ],
+  "host_permissions": [
+    "*://*.hqew.com/*",
+    "*://*.ic.net.cn/*",
+    "https://*.bomman.com/*",
+    "https://*.digikey.cn/*",
+    "https://*.digikey.com/*",
+    "https://*.ickey.cn/*",
+    "https://*.mouser.cn/*",
+    "https://*.mouser.com/*",
+    "https://admin.qidian.qq.com/*",
+    "https://alimg.szlcsc.com/*",
+    "https://item.szlcsc.com/*",
+    "https://overseas.szlcsc.com/*",
+    "https://s.taobao.com/*",
+    "https://search.ickey.cn/*",
+    "https://so.szlcsc.com/*",
+    "https://www.bomman.com/*",
+    "https://www.digikey.cn/*",
+    "https://www.mouser.cn/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.ic.net.cn/*", "*://*.bom.ai/*", "*://*.hqew.com/*"],
+      "js": ["lib/page-state.js", "content/early.js"],
+      "css": ["content/ic.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://*.bom.ai/*", "*://*.ic.net.cn/*", "*://*.hqew.com/*"],
+      "js": ["lib/page-state.js", "build.js", "lib/record.js", "content/ic.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://admin.qidian.qq.com/static_proxy/b2b-qq/wpa-link/*",
+        "https://admin.qidian.qq.com/template/*qr-code-jump*"
+      ],
+      "js": ["content/qidian.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://s.taobao.com/*",
+        "https://search.ickey.cn/*",
+        "https://so.szlcsc.com/*",
+        "https://www.bomman.com/*",
+        "https://www.digikey.cn/*",
+        "https://www.mouser.cn/*"
+      ],
+      "js": ["lookup/reader.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://*.bom.ai/*", "*://*.hqew.com/*"],
+      "js": ["lib/page-state.js", "content/adblock.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://so.szlcsc.com/*",
+        "https://search.ickey.cn/*",
+        "https://www.bomman.com/*",
+        "https://bomman.com/*",
+        "https://www.mouser.cn/*",
+        "https://www.digikey.cn/*"
+      ],
+      "js": ["lib/page-state.js", "content/srcbell.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "records.html",
+        "records.js",
+        "ui.css",
+        "lib/record.js",
+        "lib/backup.js"
+      ],
+      "matches": ["*://*.ic.net.cn/*", "*://*.bom.ai/*", "*://*.hqew.com/*"]
+    }
+  ],
+  "version_name": "0.1.0",
+  "homepage_url": "https://github.com/imchuckguo/caixin-assistant",
+  "optional_host_permissions": [
+    "https://*/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ]
+}

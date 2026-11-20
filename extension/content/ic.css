@@ -1,0 +1,1732 @@
+/* 采芯助手 · 页面样式 */
+
+/* 公司标注 */
+.cxm-original {
+  color: #e5162b !important;
+  font-weight: 700 !important;
+}
+.cxm-avoid {
+  background: #ffe14d !important;
+  color: #3a2d00 !important;
+  font-weight: 700 !important;
+  border-radius: 3px;
+  padding: 0 3px;
+}
+.cxm-caution {
+  color: #f07800 !important;
+  font-weight: 700 !important;
+  text-decoration: underline wavy #f07800 1px;
+  text-underline-offset: 3px;
+}
+
+/* QQ 标识 */
+a.cxm-qq {
+  position: relative;
+  border-radius: 50%;
+}
+a.cxm-qq-enterprise {
+  box-shadow: 0 0 0 2px #14b86a;
+}
+a.cxm-qq-personal {
+  box-shadow: 0 0 0 2px #9aa0ab;
+  filter: grayscale(0.85);
+  opacity: 0.8;
+}
+a.cxm-qq-guess.cxm-qq-enterprise {
+  box-shadow: 0 0 0 2px rgba(20, 184, 106, 0.45);
+}
+a.cxm-qq-guess.cxm-qq-personal {
+  box-shadow: 0 0 0 2px rgba(154, 160, 171, 0.5);
+}
+a.cxm-qq-personal::after {
+  content: "加";
+  position: absolute;
+  right: -6px;
+  bottom: -5px;
+  width: 12px;
+  height: 12px;
+  line-height: 12px;
+  font-size: 9px;
+  text-align: center;
+  color: #fff;
+  background: #8a909c;
+  border-radius: 50%;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+/* 去广告后，结果区居中 */
+html.cxm-noads .right_results {
+  float: none !important;
+  margin: 0 auto !important;
+}
+
+/* 提示 */
+#cxm-toast {
+  position: fixed;
+  left: 50%;
+  top: 24px;
+  transform: translate(-50%, -12px);
+  opacity: 0;
+  pointer-events: none;
+  background: rgba(17, 20, 28, 0.94);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font:
+    14px/1.5 -apple-system,
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  z-index: 2147483647;
+  transition: 0.2s;
+  max-width: 80vw;
+}
+#cxm-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* 批量询价按钮：嵌在结果栏里 */
+#cxm-fab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  background: #087f68;
+  color: #fff;
+  font:
+    600 13px/1 -apple-system,
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+  padding: 6px 12px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(92, 104, 255, 0.35);
+}
+#cxm-fab.cxm-inline {
+  float: left;
+  margin: 6px 0 0 10px;
+  height: 26px;
+}
+#cxm-fab.cxm-floating {
+  position: fixed;
+  right: 24px;
+  top: 120px;
+  z-index: 2147483000;
+  padding: 10px 16px;
+  border-radius: 999px;
+}
+#cxm-fab:hover {
+  filter: brightness(1.08);
+}
+#cxm-fab .cxm-fab-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 6px #fff;
+}
+
+/* 打开面板时，把页面往左推，面板不盖住页面内容 */
+html.cxm-drawer-open {
+  padding-right: 420px !important;
+}
+
+/* 批量询价面板 */
+#cxm-panel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 420px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: #172624;
+  border-radius: 0;
+  box-shadow: -12px 0 40px rgba(20, 24, 40, 0.18);
+  z-index: 2147483001;
+  font:
+    13px/1.5 -apple-system,
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+  overflow: hidden;
+  border-left: 1px solid #e6e8ef;
+}
+#cxm-panel * {
+  box-sizing: border-box;
+}
+#cxm-panel .cxm-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: #087f68;
+  color: #fff;
+  font-size: 14px;
+}
+#cxm-panel .cxm-x {
+  background: none;
+  border: 0;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+}
+#cxm-panel .cxm-body {
+  padding: 12px 14px;
+  overflow: auto;
+}
+#cxm-panel label {
+  display: block;
+  color: #5b6275;
+  margin-bottom: 4px;
+}
+#cxm-panel textarea,
+#cxm-panel input:not([type="checkbox"]) {
+  width: 100%;
+  border: 1px solid #d9dce6;
+  border-radius: 8px;
+  padding: 6px 8px;
+  font: inherit;
+  color: inherit;
+  outline: none;
+}
+#cxm-panel textarea:focus,
+#cxm-panel input:focus {
+  border-color: #087f68;
+}
+#cxm-panel .cxm-line {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+}
+#cxm-panel .cxm-line label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  white-space: nowrap;
+}
+#cxm-panel .cxm-line label input {
+  width: 150px;
+}
+#cxm-panel .cxm-grow {
+  flex: 1;
+}
+#cxm-panel .cxm-muted {
+  color: #657570;
+}
+#cxm-panel .cxm-small {
+  font-size: 12px;
+  margin: 10px 0 0;
+}
+#cxm-panel .cxm-link {
+  white-space: nowrap;
+  background: none;
+  border: 0;
+  color: #5b5bff;
+  cursor: pointer;
+  padding: 0 2px;
+  font: inherit;
+}
+#cxm-panel .cxm-list {
+  margin-top: 8px;
+  border: 1px solid #eceef4;
+  border-radius: 10px;
+}
+#cxm-panel .cxm-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  margin: 0;
+  border-bottom: 1px solid #f2f3f7;
+  color: #172624;
+  cursor: pointer;
+}
+#cxm-panel .cxm-item:last-child {
+  border-bottom: 0;
+}
+#cxm-panel .cxm-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#cxm-panel .cxm-tag {
+  font-size: 11px;
+  padding: 0 6px;
+  border-radius: 5px;
+}
+#cxm-panel .cxm-tag.enterprise {
+  background: #e3f8ee;
+  color: #0f9a57;
+}
+#cxm-panel .cxm-tag.personal {
+  background: #eef0f4;
+  color: #6b7182;
+}
+#cxm-panel .cxm-step {
+  margin-top: 10px;
+  background: #edf6f2;
+  border: 1px solid #cbded5;
+  border-radius: 10px;
+  padding: 10px;
+}
+#cxm-panel .hidden {
+  display: none;
+}
+#cxm-panel .cxm-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+#cxm-panel .cxm-btn {
+  border: 1px solid #d9dce6;
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font: inherit;
+  color: #172624;
+}
+#cxm-panel .cxm-btn.primary {
+  background: #087f68;
+  border-color: transparent;
+  color: #fff;
+}
+#cxm-panel .cxm-btn.ghost {
+  border-color: transparent;
+  color: #657570;
+}
+
+/* 面板底部固定按钮栏 */
+#cxm-panel .cxm-foot {
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px;
+  border-top: 1px solid #eceef4;
+  background: #fafbff;
+}
+#cxm-panel .cxm-big {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+}
+#cxm-panel .cxm-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+#cxm-panel .cxm-guide {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  background: #edf6f2;
+  border: 1px solid #cbded5;
+  border-radius: 10px;
+  color: #4a4f63;
+}
+#cxm-panel .cxm-guide ol {
+  margin: 4px 0 6px;
+  padding-left: 18px;
+}
+#cxm-panel .cxm-guide li {
+  margin: 3px 0;
+}
+#cxm-panel .cxm-guide-t {
+  font-weight: 700;
+  color: #087558;
+  margin-bottom: 4px;
+}
+#cxm-panel .cxm-guide-n {
+  font-size: 12px;
+  color: #6b7182;
+  border-top: 1px dashed #d8d0ff;
+  padding-top: 6px;
+}
+#cxm-panel .cxm-progress {
+  height: 6px;
+  background: #eceef4;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+#cxm-panel .cxm-progress span {
+  display: block;
+  height: 100%;
+  background: #087f68;
+  transition: width 0.3s;
+}
+#cxm-panel .cxm-cur {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 4px 0 10px;
+}
+#cxm-panel .cxm-howto {
+  background: #edf6f2;
+  border: 1px solid #cbded5;
+  border-radius: 10px;
+  padding: 10px 12px;
+  line-height: 1.9;
+  margin-bottom: 12px;
+}
+#cxm-panel .cxm-preview {
+  white-space: pre-wrap;
+  word-break: break-all;
+  background: #f5f7f6;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin: 10px 0 0;
+  font: inherit;
+  color: #4a4f63;
+}
+#cxm-panel .cxm-done {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  padding: 30px 0 6px;
+}
+
+/* 货源对比条（插在结果列表上方，跟着页面走） */
+#cxm-srcbar {
+  clear: both;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 6px 0 8px;
+  padding: 8px 10px;
+  background: #087f68;
+  border: 1px solid #cbded5;
+  border-radius: 8px;
+  font:
+    12px/1.5 -apple-system,
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+  color: #172624;
+}
+#cxm-srcbar .cxm-srcbar-t {
+  font-weight: 700;
+  color: #087558;
+}
+#cxm-srcbar .cxm-srcs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+#cxm-srcbar .cxm-src {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #fff;
+  border: 1px solid #e3e5ee;
+  border-radius: 6px;
+  padding: 3px 8px;
+  color: #172624 !important;
+  text-decoration: none !important;
+}
+#cxm-srcbar a.cxm-src.ok:hover {
+  border-color: #087f68;
+}
+#cxm-srcbar .cxm-src.loading {
+  color: #657570 !important;
+}
+#cxm-srcbar .cxm-src.err {
+  border-color: #ffd0d4;
+}
+#cxm-srcbar .cxm-src a {
+  color: #5b5bff;
+}
+#cxm-srcbar .cxm-stock {
+  font-style: normal;
+  color: #0f9a57;
+  font-weight: 700;
+}
+#cxm-srcbar .cxm-nostock {
+  font-style: normal;
+  color: #657570;
+}
+#cxm-srcbar .cxm-muted {
+  color: #657570;
+}
+#cxm-srcbar .cxm-grow {
+  flex: 1;
+}
+#cxm-srcbar .cxm-src-q {
+  border: 0;
+  background: #e5f1eb;
+  color: #4a3bd6;
+  border-radius: 4px;
+  padding: 1px 6px;
+  cursor: pointer;
+  font: inherit;
+}
+#cxm-srcbar .cxm-mini {
+  border: 1px solid #d9dce6;
+  background: #fff;
+  border-radius: 6px;
+  padding: 3px 8px;
+  cursor: pointer;
+  font: inherit;
+  color: #172624;
+}
+#cxm-srcbar .cxm-mini:hover {
+  border-color: #087f68;
+}
+#cxm-srcbar #cxm-watch.on {
+  background: #fff6dc;
+  border-color: #ffd36b;
+}
+
+/* 原厂直供标记 */
+.cxm-direct {
+  display: inline-block;
+  font-style: normal;
+  font-size: 11px;
+  padding: 0 6px;
+  border-radius: 4px;
+  background: #fff0e6;
+  color: #e05a00;
+  border: 1px solid #ffd2b3;
+  font-weight: 600;
+}
+
+/* 货源悬浮详情窗 */
+#cxm-pop {
+  position: fixed;
+  z-index: 2147483002;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: #172624;
+  border: 1px solid #cbded5;
+  border-radius: 12px;
+  box-shadow: 0 18px 50px rgba(20, 24, 40, 0.22);
+  overflow: hidden;
+  font:
+    12px/1.6 -apple-system,
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+}
+#cxm-pop * {
+  box-sizing: border-box;
+}
+#cxm-pop a {
+  color: #4a3bd6;
+  text-decoration: none;
+}
+#cxm-pop .cxm-pop-h {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: #087f68;
+  border-bottom: 1px solid #e5f1eb;
+}
+#cxm-pop .cxm-grow {
+  flex: 1;
+}
+#cxm-pop .cxm-stock {
+  color: #0f9a57;
+}
+#cxm-pop .cxm-muted {
+  color: #657570;
+}
+#cxm-pop .cxm-pop-b {
+  overflow: auto;
+}
+#cxm-pop .cxm-pop-it {
+  display: grid;
+  grid-template-columns: 104px 1.3fr 1.3fr 1fr;
+  gap: 14px;
+  padding: 12px 14px;
+  border-bottom: 1px solid #f0f1f6;
+}
+#cxm-pop .cxm-pop-it:last-child {
+  border-bottom: 0;
+}
+#cxm-pop .cxm-pop-img {
+  width: 104px;
+  height: 104px;
+  border: 1px solid #eceef4;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #fff;
+  color: #b0b5c3;
+}
+#cxm-pop .cxm-pop-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+  cursor: zoom-in;
+  transition: transform 0.2s;
+}
+#cxm-pop .cxm-pop-img img:hover {
+  transform: scale(1.06);
+}
+#cxm-pop .cxm-pop-model {
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+#cxm-pop .cxm-pop-info span,
+#cxm-pop .cxm-pop-t {
+  color: #657570;
+}
+#cxm-pop .cxm-pop-t {
+  margin-bottom: 2px;
+}
+#cxm-pop .cxm-lad {
+  border-collapse: collapse;
+}
+#cxm-pop .cxm-lad th {
+  color: #657570;
+  font-weight: 400;
+  text-align: left;
+  padding: 0 12px 2px 0;
+  font-size: 11px;
+}
+#cxm-pop .cxm-lad td {
+  padding: 1px 12px 1px 0;
+  white-space: nowrap;
+}
+#cxm-pop .cxm-lad b {
+  color: #1f5fff;
+  font-weight: 600;
+}
+#cxm-pop .cxm-ch {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 0 6px;
+  border-radius: 4px;
+  background: #eef0f4;
+  color: #5b6275;
+}
+#cxm-pop .cxm-ch.direct {
+  background: #fff0e6;
+  color: #e05a00;
+}
+#cxm-pop .cxm-tag-d {
+  display: inline-block;
+  background: #eef0f4;
+  border-radius: 4px;
+  padding: 0 6px;
+  margin-bottom: 2px;
+  color: #4a4f63;
+}
+
+#cxm-pop .cxm-pop-stock span,
+#cxm-pop .cxm-pop-info span:not(.cxm-ch) {
+  color: #657570;
+}
+#cxm-srcbar .cxm-brand {
+  font-size: 11px;
+}
+#cxm-srcbar .cxm-ds {
+  background: #fff7e6 !important;
+  border-color: #ffd591 !important;
+}
+#cxm-srcbar .cxm-mini-hl {
+  background: #087f68 !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+
+/* 图片放大预览 */
+#cxm-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  background: rgba(8, 10, 16, 0.86);
+  display: flex;
+  flex-direction: column;
+  font:
+    13px -apple-system,
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+}
+#cxm-lightbox .cxm-lb-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#cxm-lightbox img {
+  max-width: 80vw;
+  max-height: 78vh;
+  background: #fff;
+  border-radius: 8px;
+  cursor: grab;
+  transition: transform 0.06s;
+  user-select: none;
+}
+#cxm-lightbox .cxm-lb-bar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+}
+#cxm-lightbox .cxm-lb-bar button {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font: inherit;
+}
+#cxm-lightbox .cxm-lb-bar button:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+#cxm-lightbox .cxm-lb-zoom {
+  color: #fff;
+  min-width: 48px;
+  text-align: center;
+}
+#cxm-lightbox .cxm-lb-tip {
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  padding-bottom: 12px;
+  font-size: 12px;
+}
+
+/* ================= 深色模式 =================
+   网站本身：反色 + 色相回转（颜色基本保持，明暗反过来），图片和视频再反一次保持原样。
+   滤镜加在 html 上（加在 body 上会让网站右侧的悬浮栏等 position:fixed 元素跟着页面滚走、看不见）；
+   插件自己挂在 html 下的浮层再反一次，保持它们自己的深色样式。 */
+html.cxm-dark {
+  background: #0f1115 !important;
+  filter: invert(0.9) hue-rotate(180deg);
+}
+html.cxm-dark body {
+  background: #fff !important;
+}
+html.cxm-dark > :not(head):not(body) {
+  filter: invert(1) hue-rotate(180deg);
+}
+html.cxm-dark body img,
+html.cxm-dark body video,
+html.cxm-dark body canvas,
+html.cxm-dark body iframe,
+html.cxm-dark body svg image,
+html.cxm-dark body [style*="background-image"] {
+  filter: invert(1) hue-rotate(180deg);
+}
+/* 公司标注颜色在反色后依然醒目 */
+html.cxm-dark body .cxm-avoid {
+  filter: invert(1) hue-rotate(180deg);
+  background: #ffe14d !important;
+  color: #3a2d00 !important;
+}
+
+html.cxm-dark #cxm-panel {
+  background: #171a21;
+  color: #e6e8ee;
+  border-color: #2a2f3a;
+}
+html.cxm-dark #cxm-panel .cxm-body,
+html.cxm-dark #cxm-panel .cxm-foot {
+  background: #171a21;
+  border-color: #2a2f3a;
+}
+html.cxm-dark #cxm-panel textarea,
+html.cxm-dark #cxm-panel input:not([type="checkbox"]) {
+  background: #0f1115;
+  color: #e6e8ee;
+  border-color: #2f3542;
+}
+html.cxm-dark #cxm-panel .cxm-list {
+  border-color: #2a2f3a;
+}
+html.cxm-dark #cxm-panel .cxm-item {
+  color: #e6e8ee;
+  border-color: #232833;
+}
+html.cxm-dark #cxm-panel .cxm-guide,
+html.cxm-dark #cxm-panel .cxm-howto,
+html.cxm-dark #cxm-panel .cxm-step {
+  background: #1f1b33;
+  border-color: #3a3260;
+  color: #cfd2e0;
+}
+html.cxm-dark #cxm-panel .cxm-guide-t {
+  color: #b4a6ff;
+}
+html.cxm-dark #cxm-panel .cxm-preview {
+  background: #0f1115;
+  color: #cfd2e0;
+}
+html.cxm-dark #cxm-panel .cxm-btn {
+  background: #222733;
+  color: #e6e8ee;
+  border-color: #343a48;
+}
+html.cxm-dark #cxm-panel .cxm-btn.primary {
+  background: #087f68;
+  color: #fff;
+}
+html.cxm-dark #cxm-panel .cxm-tag.enterprise {
+  background: #12352a;
+  color: #4ade80;
+}
+html.cxm-dark #cxm-panel .cxm-tag.personal {
+  background: #2a2f3a;
+  color: #aab0bf;
+}
+html.cxm-dark #cxm-pop {
+  background: #171a21;
+  color: #e6e8ee;
+  border-color: #2f2a55;
+}
+html.cxm-dark #cxm-pop .cxm-pop-h {
+  background: #087f68;
+  border-color: #2f2a55;
+}
+html.cxm-dark #cxm-pop .cxm-pop-it {
+  border-color: #232833;
+}
+html.cxm-dark #cxm-pop a {
+  color: #a99cff;
+}
+html.cxm-dark #cxm-pop .cxm-lad b {
+  color: #7aa7ff;
+}
+html.cxm-dark #cxm-pop .cxm-tag-d,
+html.cxm-dark #cxm-pop .cxm-ch {
+  background: #262b36;
+  color: #cfd2e0;
+}
+html.cxm-dark #cxm-pop .cxm-ch.direct,
+html.cxm-dark .cxm-direct {
+  background: #3a2410;
+  color: #ffb36b;
+  border-color: #6b4012;
+}
+
+/* 一键复制名片按钮 */
+.cxm-copycard {
+  position: absolute;
+  z-index: 99;
+  top: 6px;
+  right: 8px;
+  border: 0;
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  background: #087f68;
+  color: #fff !important;
+  font:
+    600 12px/1.4 -apple-system,
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+  box-shadow: 0 4px 12px rgba(92, 104, 255, 0.35);
+}
+.cxm-copycard:hover {
+  filter: brightness(1.1);
+}
+.cxm-copycard.inline {
+  position: static;
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: middle;
+  padding: 2px 10px;
+}
+#cxm-pop .cxm-pop-it.noimg {
+  grid-template-columns: 1.3fr 1.3fr 1fr;
+}
+
+#cxm-pop .cxm-tb-price {
+  color: #ff5000;
+  font-size: 16px;
+}
+html.cxm-dark #cxm-pop .cxm-tb-price {
+  color: #ff8a4c;
+}
+
+/* 货源条里的实时询价记录列表 */
+#cxm-srcbar .cxm-live {
+  flex-basis: 100%;
+  background: #fff;
+  border: 1px solid #e3e5ee;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+#cxm-srcbar .cxm-live-h {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#cxm-srcbar .cxm-live-h b {
+  color: #087558;
+}
+#cxm-srcbar .cxm-live-list {
+  max-height: 210px;
+  overflow: auto;
+  margin-top: 4px;
+}
+#cxm-srcbar .cxm-live table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#cxm-srcbar .cxm-live th {
+  position: sticky;
+  top: 0;
+  background: #fafbff;
+  color: #5b6275;
+  font-weight: 600;
+  text-align: left;
+  padding: 3px 6px;
+  white-space: nowrap;
+}
+#cxm-srcbar .cxm-live td {
+  padding: 3px 6px;
+  border-top: 1px solid #f0f1f6;
+  white-space: nowrap;
+}
+#cxm-srcbar .cxm-live td.co {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#cxm-srcbar .cxm-live tr.valid td {
+  background: #effaf4;
+}
+#cxm-srcbar .cxm-live tr.fresh td {
+  animation: cxm-live-flash 2s;
+}
+@keyframes cxm-live-flash {
+  from {
+    background: #fff3c4;
+  }
+}
+#cxm-srcbar .cxm-live-tag {
+  font-size: 10px;
+  padding: 0 4px;
+  margin-left: 3px;
+  border-radius: 4px;
+  background: #eef0f4;
+  color: #5b6275;
+}
+#cxm-srcbar .cxm-live-tag.ent {
+  background: #e3f8ee;
+  color: #0f9a57;
+}
+#cxm-srcbar .cxm-live-empty {
+  padding: 6px 2px 2px;
+}
+
+/* 华强电子网：名片里的手机号是黑字图片，深色模式下跟着页面一起反色，才能看清 */
+html.cxm-dark body #card .phone-img img {
+  filter: none !important;
+}
+
+/* 货源网站开关 */
+#cxm-srcbar .cxm-srcset-wrap {
+  position: relative;
+}
+#cxm-srcbar .cxm-srcset {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 50;
+  width: 230px;
+  background: #fff;
+  border: 1px solid #d9dce6;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 8px 10px;
+}
+#cxm-srcbar .cxm-srcset.hidden {
+  display: none;
+}
+#cxm-srcbar .cxm-srcset-t {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+#cxm-srcbar .cxm-srcset label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: 48%;
+  padding: 2px 0;
+  cursor: pointer;
+  color: #172624;
+  font-weight: normal;
+}
+#cxm-srcbar .cxm-srcset input {
+  margin: 0;
+  width: auto;
+  height: auto;
+}
+#cxm-srcbar .cxm-srcset .cxm-muted {
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* 实时列表：直接填报价 */
+#cxm-srcbar .cxm-live th.fill {
+  background: #fff8ec;
+  color: #9a5b00;
+}
+#cxm-srcbar .cxm-live td {
+  vertical-align: middle;
+}
+#cxm-srcbar .cxm-live input[data-f],
+#cxm-srcbar .cxm-live select[data-f] {
+  box-sizing: border-box;
+  height: 24px;
+  margin: 0;
+  padding: 0 5px;
+  border: 1px solid #dfe2ea;
+  border-radius: 5px;
+  background: #fff;
+  color: #172624;
+  font:
+    12px/22px -apple-system,
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+  outline: none;
+  box-shadow: none;
+  vertical-align: middle;
+}
+#cxm-srcbar .cxm-live input[data-f]:focus,
+#cxm-srcbar .cxm-live select[data-f]:focus {
+  border-color: #087f68;
+  box-shadow: 0 0 0 2px #e5f1eb;
+}
+#cxm-srcbar .cxm-live .w-qty {
+  width: 64px;
+}
+#cxm-srcbar .cxm-live .w-pr {
+  width: 70px;
+}
+#cxm-srcbar .cxm-live .w-ld {
+  width: 64px;
+}
+#cxm-srcbar .cxm-live select[data-f] {
+  width: 84px;
+  padding: 0 2px;
+}
+#cxm-srcbar .cxm-live td.pr {
+  white-space: nowrap;
+}
+#cxm-srcbar .cxm-live-tax {
+  margin-left: 3px;
+  padding: 0 5px;
+  height: 22px;
+  border-radius: 5px;
+  font: 12px/20px inherit;
+  cursor: pointer;
+  vertical-align: middle;
+}
+#cxm-srcbar .cxm-live-tax.t0 {
+  color: #0f9a57;
+  border: 1px solid #bfe8d2;
+  background: #f2fbf6;
+}
+#cxm-srcbar .cxm-live-tax.t1 {
+  color: #e05a00;
+  border: 1px solid #f6d2b8;
+  background: #fff6ef;
+}
+#cxm-srcbar .cxm-live-best {
+  display: none;
+  margin-left: 3px;
+  font-size: 11px;
+  color: #fff;
+  background: #0f9a57;
+  border-radius: 4px;
+  padding: 0 4px;
+}
+#cxm-srcbar .cxm-live tr.best .cxm-live-best {
+  display: inline-block;
+}
+#cxm-srcbar .cxm-live tr.best input[data-f="price"] {
+  color: #0f9a57;
+  font-weight: 700;
+}
+#cxm-srcbar .cxm-live td.ops {
+  white-space: nowrap;
+}
+#cxm-srcbar .cxm-live td.ops button {
+  height: 22px;
+  padding: 0 8px;
+  margin-right: 4px;
+  border-radius: 5px;
+  border: 1px solid #d9dce6;
+  background: #fff;
+  color: #172624;
+  cursor: pointer;
+  font: 12px/20px inherit;
+}
+#cxm-srcbar .cxm-live .cxm-live-ok {
+  color: #0f9a57 !important;
+  border-color: #bfe8d2 !important;
+  font-weight: 700 !important;
+}
+#cxm-srcbar .cxm-live tr.valid .cxm-live-ok {
+  background: #0f9a57 !important;
+  color: #fff !important;
+  border-color: #0f9a57 !important;
+}
+#cxm-srcbar .cxm-live-chk {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  color: #5b6275;
+  font-weight: normal;
+  margin: 0;
+}
+#cxm-srcbar .cxm-live-chk input {
+  margin: 0;
+  width: auto;
+  height: auto;
+}
+#cxm-srcbar .cxm-live-list {
+  max-height: 260px;
+}
+
+/* 实时列表：队友的记录（只读） */
+#cxm-srcbar .cxm-live tr.ro td {
+  background: #fafbff;
+  color: #3b4152;
+}
+#cxm-srcbar .cxm-live tr.ro.valid td {
+  background: #f1faf5;
+}
+#cxm-srcbar .cxm-live-who {
+  font-size: 11px;
+  padding: 0 6px;
+  border-radius: 4px;
+  background: #eef2ff;
+  color: #3b4fd6;
+}
+#cxm-srcbar .cxm-live-okmark {
+  color: #0f9a57;
+  font-weight: 700;
+}
+
+/* 实时列表：删除按钮 */
+#cxm-srcbar .cxm-live td.ops .cxm-live-del {
+  border-color: transparent !important;
+  color: #9aa0ab !important;
+  padding: 0 5px !important;
+}
+#cxm-srcbar .cxm-live td.ops .cxm-live-del:hover {
+  color: #e5162b !important;
+  background: #fff1f2 !important;
+}
+
+/* 货源对比：蓝色极光跑马灯边框（一束亮光沿边框转圈） */
+@property --cxm-aurora {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+#cxm-srcbar {
+  position: relative;
+  isolation: isolate;
+  border-color: transparent !important;
+  box-shadow: 0 0 14px rgba(79, 140, 255, 0.28);
+  animation: cxm-aurora-glow 3s ease-in-out infinite;
+}
+#cxm-srcbar::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  padding: 2px;
+  border-radius: 10px;
+  pointer-events: none;
+  z-index: 0;
+  background: conic-gradient(
+    from var(--cxm-aurora),
+    rgba(79, 140, 255, 0.25) 0deg,
+    rgba(124, 92, 255, 0.25) 200deg,
+    #00e5ff 270deg,
+    #087f68 300deg,
+    #087f68 330deg,
+    rgba(79, 140, 255, 0.25) 360deg
+  );
+  -webkit-mask:
+    #087f68 content-box,
+    #087f68;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: cxm-aurora-spin 4s linear infinite;
+}
+@keyframes cxm-aurora-spin {
+  to {
+    --cxm-aurora: 360deg;
+  }
+}
+@keyframes cxm-aurora-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(79, 140, 255, 0.22);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(0, 229, 255, 0.38);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #cxm-srcbar,
+  #cxm-srcbar::before {
+    animation: none;
+  }
+}
+
+/* IC交易网右侧浮动栏：询价记录本入口（替换原来的“价格”） */
+#floatNav .cxm-recnavdiv .cxm-recnav {
+  display: block;
+  width: 38px;
+  height: auto !important;
+  padding: 5px 0 4px;
+  text-align: center;
+  cursor: pointer;
+  color: #555;
+  text-decoration: none;
+}
+#floatNav .cxm-recnavdiv {
+  height: auto !important;
+  overflow: visible !important;
+}
+#floatNav .cxm-recnavdiv .cxm-recicon {
+  display: block;
+  height: 17px;
+  line-height: 0;
+  color: #ff7a1a;
+}
+#floatNav .cxm-recnavdiv .cxm-recicon svg {
+  display: inline-block;
+}
+#floatNav .cxm-recnavdiv .fixedText {
+  display: block;
+  font-size: 11px;
+  line-height: 13px;
+  margin-top: 3px;
+  color: #333;
+}
+#floatNav .cxm-recnavdiv .cxm-recnav:hover {
+  background: #ff6a00;
+}
+#floatNav .cxm-recnavdiv .cxm-recnav:hover .cxm-recicon,
+#floatNav .cxm-recnavdiv .cxm-recnav:hover .fixedText {
+  color: #fff;
+}
+
+/* 右侧栏入口：华强电子网 / 正能量网 */
+#right-side-fixed li.cxm-side {
+  height: auto !important;
+  cursor: pointer;
+}
+#right-side-fixed li.cxm-side .item-con {
+  height: auto !important;
+  padding: 6px 0 5px;
+  text-align: center;
+}
+#right-side-fixed li.cxm-side .cxm-sideicon {
+  display: block;
+  height: 18px;
+  line-height: 0;
+  color: #ff7a1a;
+}
+#right-side-fixed li.cxm-side .name {
+  line-height: 14px !important;
+  font-size: 11px !important;
+  margin-top: 3px;
+}
+#bartrigger .cxm-side {
+  cursor: pointer;
+}
+#bartrigger .cxm-side .iconbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#bartrigger .cxm-side .cxm-sideicon {
+  line-height: 0;
+  color: #ff7a1a;
+}
+#bartrigger .cxm-side .title {
+  line-height: 13px !important;
+  font-size: 11px !important;
+  white-space: normal !important;
+}
+
+/* 下半屏面板：询价记录本（从底部弹出，上半屏仍能看到网页） */
+#cxm-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483600;
+  pointer-events: none;
+}
+#cxm-drawer .cxm-drawer-mask {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 17, 21, 0.18);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+#cxm-drawer .cxm-drawer-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50vh;
+  min-height: 320px;
+  background: #f5f7f6;
+  box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.18);
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.22s ease;
+}
+#cxm-drawer.open {
+  pointer-events: auto;
+}
+#cxm-drawer.open .cxm-drawer-mask {
+  opacity: 1;
+}
+#cxm-drawer.open .cxm-drawer-panel {
+  transform: none;
+}
+#cxm-drawer header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  color: #fff;
+  background: #087f68;
+  font:
+    13px/1.5 -apple-system,
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+}
+#cxm-drawer header b {
+  font-size: 14px;
+}
+#cxm-drawer .cxm-drawer-pn {
+  opacity: 0.85;
+  font-size: 12px;
+}
+#cxm-drawer .cxm-grow {
+  flex: 1;
+}
+#cxm-drawer header button {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-radius: 6px;
+  padding: 3px 10px;
+  cursor: pointer;
+  font: inherit;
+}
+#cxm-drawer header button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+#cxm-drawer iframe {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  background: #f5f7f6;
+}
+
+/* 实时列表：QQ 可点击、公司名片 */
+#cxm-srcbar .cxm-live a.cxm-live-qq {
+  color: #2f6bff !important;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+#cxm-srcbar .cxm-live a.cxm-live-qq:hover {
+  text-decoration: underline !important;
+}
+#cxm-srcbar .cxm-live td.co {
+  cursor: default;
+}
+#cxm-srcbar .cxm-live td.co:hover {
+  color: #087558;
+  text-decoration: underline dotted;
+}
+#cxm-cardpop {
+  position: absolute;
+  z-index: 2147483500;
+  display: none;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+#cxm-cardpop.show {
+  display: block;
+}
+#cxm-cardpop .cxm-cardpop-none {
+  padding: 12px 14px;
+  max-width: 320px;
+  font:
+    12px/1.6 -apple-system,
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+  color: #5b6275;
+}
+#cxm-cardpop .cxm-cardpop-none b {
+  display: block;
+  color: #172624;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+/* 右侧栏入口图标：（和货源条一致） */
+.cxm-rec-emoji {
+  font-size: 16px;
+  line-height: 18px;
+  display: inline-block;
+}
+#floatNav .cxm-recnavdiv .cxm-recicon,
+#right-side-fixed li.cxm-side .cxm-sideicon,
+#bartrigger .cxm-side .cxm-sideicon {
+  line-height: 18px;
+  height: 18px;
+}
+
+/* 批量询价：询价内容可直接修改 */
+#cxm-panel textarea.cxm-preview-edit {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  border: 1px solid #d9dce6;
+  min-height: 64px;
+  line-height: 1.6;
+}
+#cxm-panel textarea.cxm-preview-edit:focus {
+  outline: none;
+  border-color: #087f68;
+  box-shadow: 0 0 0 2px #e5f1eb;
+}
+/* 删除按钮第一次点击后变成  */
+#cxm-srcbar .cxm-live td.ops .cxm-live-del.armed {
+  color: #0f9a57 !important;
+  background: #effaf4 !important;
+  border-color: #bfe8d2 !important;
+}
+#cxm-panel .cxm-warn {
+  color: #e05a00;
+}
+#cxm-panel .cxm-copystate {
+  margin-top: 6px;
+  font-size: 12px;
+}
+#cxm-panel .cxm-copystate.ok {
+  color: #0f9a57;
+}
+#cxm-panel .cxm-copystate.bad {
+  color: #e5162b;
+  font-weight: 600;
+}
+
+/* 实时列表适配网站宽度：不超出货源对比框（IC交易网结果区较窄） */
+#cxm-srcbar {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+#cxm-srcbar .cxm-live {
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+#cxm-srcbar .cxm-live-list {
+  overflow: auto;
+  max-width: 100%;
+}
+#cxm-srcbar .cxm-live table {
+  width: 100%;
+  table-layout: auto;
+}
+#cxm-srcbar .cxm-live th,
+#cxm-srcbar .cxm-live td {
+  padding: 3px 4px;
+}
+#cxm-srcbar .cxm-live td.co {
+  max-width: 190px;
+}
+#cxm-srcbar .cxm-live td:nth-child(5) {
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#cxm-srcbar .cxm-live .w-qty {
+  width: 56px;
+}
+#cxm-srcbar .cxm-live .w-pr {
+  width: 62px;
+}
+#cxm-srcbar .cxm-live .w-ld {
+  width: 56px;
+}
+#cxm-srcbar .cxm-live select[data-f] {
+  width: 74px;
+}
+#cxm-srcbar .cxm-live td.ops button {
+  padding: 0 6px;
+  margin-right: 3px;
+}
+#cxm-srcbar .cxm-live-h {
+  flex-wrap: wrap;
+  row-gap: 4px;
+}
+/* 再紧凑一些：IC交易网约 900px 宽也能一屏放下 */
+#cxm-srcbar .cxm-live table {
+  font-size: 12px;
+}
+#cxm-srcbar .cxm-live th,
+#cxm-srcbar .cxm-live td {
+  padding: 3px 3px;
+}
+#cxm-srcbar .cxm-live td.co {
+  max-width: 150px;
+}
+#cxm-srcbar .cxm-live td:nth-child(5) {
+  max-width: 76px;
+}
+#cxm-srcbar .cxm-live .cxm-live-tag {
+  margin-left: 2px;
+  padding: 0 3px;
+}
+#cxm-srcbar .cxm-live .w-qty {
+  width: 50px;
+}
+#cxm-srcbar .cxm-live .w-pr {
+  width: 54px;
+}
+#cxm-srcbar .cxm-live .w-ld {
+  width: 50px;
+}
+#cxm-srcbar .cxm-live select[data-f] {
+  width: 64px;
+}
+#cxm-srcbar .cxm-live-tax {
+  padding: 0 3px;
+  margin-left: 2px;
+}
+#cxm-srcbar .cxm-live-best {
+  margin-left: 2px;
+  padding: 0 3px;
+}
+#cxm-srcbar .cxm-live td.ops button {
+  padding: 0 5px;
+  margin-right: 2px;
+}
+#cxm-srcbar .cxm-live td.pr {
+  position: relative;
+}
+#cxm-srcbar .cxm-live tr.best .cxm-live-best {
+  position: absolute;
+  left: 2px;
+  top: -3px;
+  font-size: 9px;
+  line-height: 12px;
+  padding: 0 3px;
+  margin: 0;
+  z-index: 1;
+}
+#cxm-srcbar .cxm-live td.co {
+  max-width: 132px;
+}
+
+/* 右侧浮动栏只留插件的“批量询价”“询价记录本” */
+.cxm-sidehide {
+  display: none !important;
+}
+.cxm-sideicon img.cxm-qiaqia {
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 每家公司后面的勾选框 */
+.cxm-pick {
+  position: absolute !important;
+  top: 50%;
+  transform: translateY(-50%);
+  left: auto;
+  z-index: 5;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin: 0 !important;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 5px;
+  float: none !important;
+}
+.cxm-pick:hover {
+  background: rgba(124, 92, 255, 0.12);
+}
+.cxm-pick input {
+  width: 15px !important;
+  height: 15px !important;
+  margin: 0 !important;
+  cursor: pointer;
+  accent-color: #6d4dff;
+  position: static !important;
+  opacity: 1 !important;
+  display: inline-block !important;
+}
+
+/* 公司卡片顶部：一键复制 */
+#cxm-cardpop .cxm-cardpop-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  background: #edf6f2;
+  border-bottom: 1px solid #e6e1ff;
+  font:
+    12px/1.5 -apple-system,
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+  color: #087558;
+}
+#cxm-cardpop .cxm-cardpop-name {
+  flex: 1;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 360px;
+}
+#cxm-cardpop .cxm-cardpop-copy {
+  border: 0;
+  border-radius: 6px;
+  padding: 3px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  background: #087f68;
+  color: #fff;
+  font:
+    600 12px/1.4 -apple-system,
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+}
+#cxm-cardpop .cxm-cardpop-copy:hover {
+  filter: brightness(1.1);
+}
+html.cxm-dark #cxm-cardpop .cxm-cardpop-tools {
+  background: #221d3a;
+  border-color: #3a3160;
+  color: #c9bfff;
+}
+#right-side-fixed li.cxm-side-batch {
+  height: auto !important;
+}
+#right-side-fixed li.cxm-side-batch .item-con {
+  height: auto !important;
+  padding: 6px 0 5px;
+  text-align: center;
+}
+#right-side-fixed li.cxm-side-batch .cxm-sideicon {
+  display: block;
+  height: 22px;
+  line-height: 0;
+}
+#right-side-fixed li.cxm-side-batch .name {
+  line-height: 14px !important;
+  font-size: 11px !important;
+  margin-top: 3px;
+}
+
+/* 批量询价图标（电脑） */
+img.cxm-batch-ico {
+  height: 18px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+#bartrigger .cxm-side img.cxm-batch-ico {
+  height: 20px;
+}
+#cxm-drawer .cxm-drawer-tip {
+  padding: 14px 16px;
+  background: #fff8ec;
+  color: #9a5b00;
+  font:
+    13px/1.6 -apple-system,
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+}
+#cxm-drawer .cxm-drawer-tip button {
+  margin-left: 10px;
+  border: 1px solid #f0c49a;
+  background: #fff;
+  color: #e07000;
+  border-radius: 6px;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+
+/* 批量询价：已经询价过的公司（绿色） */
+#cxm-panel .cxm-item.cxm-asked .cxm-name {
+  color: #0f9a57 !important;
+}
+#cxm-panel .cxm-item.cxm-asked input {
+  accent-color: #16a34a;
+}
+#cxm-panel .cxm-asked-t {
+  flex: none;
+  font-size: 11px;
+  padding: 0 6px;
+  border-radius: 8px;
+  background: #e3f8ee;
+  color: #0f9a57;
+}
+.cxm-pick.cxm-asked {
+  background: #e3f8ee;
+  box-shadow: inset 0 0 0 1.5px #22c55e;
+  border-radius: 5px;
+}
+.cxm-pick.cxm-asked input {
+  accent-color: #16a34a;
+  outline: 2px solid #22c55e;
+  outline-offset: -1px;
+  border-radius: 3px;
+}
+html.cxm-dark #cxm-panel .cxm-item.cxm-asked .cxm-name {
+  color: #3ddc84 !important;
+}
+html.cxm-dark .cxm-pick.cxm-asked {
+  background: rgba(34, 197, 94, 0.15);
+}

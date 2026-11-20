@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>采芯助手 · 库存价格监控</title>
+    <link rel="stylesheet" href="ui.css" />
+    <style>
+      body {
+        background: #f3f4f8;
+      }
+      .wrap {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 16px 20px 40px;
+      }
+      .top {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 26px;
+        align-items: center;
+        background: #fff;
+        border: 1px solid #eceef4;
+        border-radius: 12px;
+        padding: 12px 18px;
+        margin-bottom: 12px;
+      }
+      .top .k {
+        color: #657570;
+        font-size: 12px;
+      }
+      .top .v {
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .top .v.hot {
+        color: #e25c00;
+      }
+      .top .grow {
+        flex: 1;
+      }
+      .top select {
+        width: auto;
+        padding: 4px 8px;
+      }
+      .run {
+        color: #087558;
+        font-weight: 600;
+      }
+      .bar {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+      }
+      .bar input[type="search"] {
+        width: 240px;
+      }
+      .bar .grow {
+        flex: 1;
+      }
+      .tabs {
+        display: flex;
+        background: #e8e9f0;
+        border-radius: 9px;
+        padding: 3px;
+      }
+      .tabs button {
+        border: 0;
+        background: none;
+        padding: 5px 14px;
+        border-radius: 7px;
+        color: #5b6275;
+      }
+      .tabs button.on {
+        background: #fff;
+        color: #172624;
+        font-weight: 600;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      }
+
+      /* 一条监控 = 一张卡片，排得像商城的商品行 */
+      .card2 {
+        background: #fff;
+        border: 1px solid #eceef4;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        overflow: hidden;
+      }
+      .card2.hl {
+        border-color: #087f68;
+        box-shadow: 0 0 0 3px #e5f1eb;
+      }
+      .card2.chg {
+        border-left: 4px solid #ff8a00;
+      }
+      .strip {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 7px 16px;
+        font-size: 12px;
+        background: #fafbfd;
+        border-bottom: 1px solid #f0f1f6;
+        color: #5b6275;
+        flex-wrap: wrap;
+      }
+      .strip .site {
+        font-weight: 600;
+        color: #172624;
+        font-size: 13px;
+      }
+      .strip .grow {
+        flex: 1;
+      }
+      .badge {
+        display: inline-block;
+        padding: 1px 8px;
+        border-radius: 10px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .b-chg {
+        background: #fff1e0;
+        color: #c25e00;
+      }
+      .b-same {
+        background: #eef0f4;
+        color: #7a8090;
+      }
+      .b-err {
+        background: #ffecee;
+        color: #d4142a;
+      }
+      .b-src {
+        background: #f0eeff;
+        color: #087558;
+        font-weight: 500;
+      }
+      .strip button {
+        padding: 3px 10px;
+        font-size: 12px;
+      }
+      .main {
+        display: grid;
+        grid-template-columns: 116px minmax(200px, 1.25fr) minmax(
+            300px,
+            1.6fr
+          ) minmax(200px, 1fr);
+        gap: 0 20px;
+        padding: 14px 16px;
+        align-items: start;
+      }
+      .pic {
+        width: 116px;
+        height: 116px;
+        border: 1px solid #eef0f4;
+        border-radius: 8px;
+        object-fit: contain;
+        background: #fff;
+      }
+      .nopic {
+        width: 116px;
+        height: 116px;
+        border-radius: 8px;
+        background: #f3f4f8;
+        display: grid;
+        place-items: center;
+        color: #b0b4c0;
+        font-size: 12px;
+      }
+      .model {
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .model mark {
+        background: #fff36b;
+        padding: 0 2px;
+      }
+      .model a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .model a:hover {
+        color: #087558;
+      }
+      .meta {
+        margin-top: 6px;
+        color: #657570;
+        font-size: 12px;
+        line-height: 1.9;
+      }
+      .meta b {
+        color: #172624;
+        font-weight: 500;
+      }
+      .h {
+        color: #657570;
+        font-size: 12px;
+        margin-bottom: 4px;
+      }
+      /* 价格梯度：数量 | 加入时 | 现在 */
+      table.lad {
+        border-collapse: collapse;
+        width: 100%;
+        font-variant-numeric: tabular-nums;
+      }
+      table.lad th {
+        font-size: 12px;
+        color: #657570;
+        font-weight: 500;
+        text-align: right;
+        padding: 2px 8px;
+      }
+      table.lad th:first-child,
+      table.lad td:first-child {
+        text-align: left;
+      }
+      table.lad td {
+        padding: 3px 8px;
+        text-align: right;
+        border-top: 1px solid #f4f5f9;
+      }
+      table.lad td.q {
+        color: #3b5bdb;
+      }
+      td.was {
+        color: #a0a5b5;
+      }
+      td.now {
+        color: #172624;
+        font-weight: 600;
+      }
+      td.now.down {
+        background: #e9f9f0;
+        color: #0f8a4f;
+      }
+      td.now.up {
+        background: #fff0f0;
+        color: #d4142a;
+      }
+      .pct {
+        font-size: 11px;
+        margin-left: 4px;
+        font-weight: 600;
+      }
+      /* 库存：大数字 + 变化 */
+      .stock-now {
+        font-size: 26px;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+        line-height: 1.2;
+      }
+      .stock-now.zero {
+        color: #d4142a;
+      }
+      .chip {
+        display: inline-block;
+        margin-left: 6px;
+        padding: 1px 8px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        vertical-align: middle;
+      }
+      .chip.up {
+        background: #e9f9f0;
+        color: #0f8a4f;
+      }
+      .chip.down {
+        background: #fff0f0;
+        color: #d4142a;
+      }
+      .hist {
+        margin-top: 8px;
+        font-size: 12px;
+        color: #6b7183;
+        line-height: 1.9;
+        font-variant-numeric: tabular-nums;
+      }
+      .hist s {
+        color: #b0b4c0;
+      }
+      .hist .up {
+        color: #0f8a4f;
+        font-weight: 600;
+      }
+      .hist .down {
+        color: #d4142a;
+        font-weight: 600;
+      }
+      .same {
+        color: #b0b4c0;
+      }
+      /* 型号监控（三个网站加的）：每个网站一行 */
+      table.sites {
+        border-collapse: collapse;
+        width: 100%;
+        font-variant-numeric: tabular-nums;
+      }
+      table.sites th {
+        font-size: 12px;
+        color: #657570;
+        font-weight: 500;
+        text-align: right;
+        padding: 4px 10px;
+        border-bottom: 1px solid #f0f1f6;
+      }
+      table.sites th:first-child,
+      table.sites td:first-child {
+        text-align: left;
+      }
+      table.sites td {
+        padding: 7px 10px;
+        text-align: right;
+        border-bottom: 1px solid #f6f7fa;
+      }
+      table.sites tr:last-child td {
+        border-bottom: 0;
+      }
+      table.sites td.cell-up {
+        background: #e9f9f0;
+        color: #0f8a4f;
+        font-weight: 600;
+      }
+      table.sites td.cell-down {
+        background: #fff0f0;
+        color: #d4142a;
+        font-weight: 600;
+      }
+      table.sites a {
+        color: #172624;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      table.sites a:hover {
+        color: #087558;
+      }
+      .x {
+        border: 0;
+        background: none;
+        color: #b0b4c0;
+        padding: 2px 6px;
+        font-size: 14px;
+      }
+      .x:hover {
+        color: #d4142a;
+      }
+      .ev {
+        padding: 6px 16px 10px;
+        color: #5b6275;
+        font-size: 12px;
+        border-top: 1px dashed #eceef4;
+      }
+      .ev div {
+        margin-top: 2px;
+      }
+      .empty {
+        text-align: center;
+        padding: 50px 20px;
+        color: #657570;
+        background: #fff;
+        border: 1px dashed #d9dce6;
+        border-radius: 12px;
+        line-height: 2;
+      }
+      .allev {
+        background: #fff;
+        border: 1px solid #eceef4;
+        border-radius: 12px;
+        padding: 4px 16px 10px;
+      }
+      .allev div.e {
+        padding: 5px 0;
+        border-top: 1px solid #f4f5f9;
+        color: #4a4f63;
+      }
+      .allev .t {
+        color: #657570;
+        margin-right: 6px;
+      }
+      details summary {
+        cursor: pointer;
+        color: #5b6275;
+        margin: 14px 0 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="head">
+      <b>采芯助手 · 库存价格监控</b>
+      <div class="sub">
+        监控的商品和型号、下次检查时间、加入时和现在的库存、价格对比 ·
+        全部保存在本机
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <div class="k">监控中</div>
+          <div class="v" id="nWatch">0</div>
+        </div>
+        <div>
+          <div class="k">有变化</div>
+          <div class="v hot" id="nChg">0</div>
+        </div>
+        <div>
+          <div class="k">检查间隔</div>
+          <select id="minutes">
+            <option value="30">每 30 分钟</option>
+            <option value="60">每 1 小时</option>
+            <option value="120">每 2 小时</option>
+            <option value="240">每 4 小时</option>
+            <option value="720">每 12 小时</option>
+            <option value="1440">每天一次</option>
+          </select>
+        </div>
+        <div>
+          <div class="k">上次检查</div>
+          <div class="v" id="lastRun">-</div>
+        </div>
+        <div>
+          <div class="k">下次检查</div>
+          <div class="v" id="nextRun">-</div>
+        </div>
+        <div class="grow"><span class="run" id="running"></span></div>
+        <button id="testNotify" title="弹出一条示例通知，看看提醒长什么样">
+          模拟提醒
+        </button>
+        <button id="checkNow" class="primary">立即检查</button>
+      </div>
+      <div class="bar">
+        <div class="tabs" id="tabs">
+          <button data-f="all" class="on">全部</button
+          ><button data-f="chg">有变化</button
+          ><button data-f="item">单个商品</button
+          ><button data-f="pn">型号汇总</button>
+        </div>
+        <input type="search" id="q" placeholder="搜索型号" />
+        <span class="grow"></span>
+        <span class="muted"
+          >在立创、云汉等商品旁点“ 监控”：只盯那一条商品；在三个网站点“
+          加入库存价格监控”：查货源对比里开着的网站。浏览器开着才会检查。</span
+        >
+      </div>
+      <div id="list"></div>
+      <details id="histBox">
+        <summary>全部提醒记录（<span id="nEv">0</span> 条）</summary>
+        <div class="allev" id="hist"></div>
+      </details>
+    </div>
+    <script src="watch.js"></script>
+  </body>
+</html>

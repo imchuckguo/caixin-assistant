@@ -1,0 +1,18 @@
+services:
+  team:
+    build: .
+    restart: unless-stopped
+    init: true
+    env_file: .env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8787
+      CAIXIN_DB: /app/data/caixin.sqlite
+    ports:
+      - "127.0.0.1:8787:8787"
+    volumes:
+      - caixin-data:/app/data
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+volumes:
+  caixin-data:

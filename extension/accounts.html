@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>采芯助手 · 网站账号登录状态</title>
+    <link rel="stylesheet" href="ui.css" />
+    <style>
+      .wrap {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 16px 20px 40px;
+      }
+      .safe {
+        background: #effaf4;
+        border: 1px solid #bfe9d2;
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin-bottom: 12px;
+        color: #1f4d36;
+        line-height: 1.8;
+      }
+      .safe b.t {
+        color: #0f7a45;
+        font-size: 14px;
+      }
+      .site {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        align-items: center;
+        background: #fff;
+        border: 1px solid #eceef4;
+        border-radius: 12px;
+        padding: 12px 14px;
+        margin-bottom: 8px;
+      }
+      .site .n {
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .site .d {
+        color: #657570;
+        font-size: 12px;
+        margin-top: 2px;
+      }
+      .st {
+        font-size: 12px;
+        margin-top: 4px;
+      }
+      .st.ok {
+        color: #0f9a57;
+      }
+      .st.bad {
+        color: #e5162b;
+      }
+      .st.unk {
+        color: #657570;
+      }
+      .ops {
+        display: flex;
+        gap: 6px;
+      }
+      .steps {
+        margin: 6px 0 0;
+        padding-left: 18px;
+        color: #4a4f63;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="head">
+      <b>采芯助手 · 网站账号登录状态</b>
+      <div class="sub">有些网站登录后才显示库存和价格</div>
+    </div>
+    <div class="wrap">
+      <div class="safe">
+        <b class="t"> 插件不会接触你的账号密码</b><br />
+        ·
+        你是在<b>各网站自己的登录页</b>登录，账号密码只交给那个网站，插件看不到、也不保存。<br />
+        ·
+        登录后，浏览器会像平时一样记住登录状态（和你平常上网一样，关掉浏览器也不会退出，除非你自己退出或网站过期）。插件查询时直接沿用这个登录状态。<br />
+        ·
+        本插件<b>没有收集用户数据的后台</b>：询价记录、关注型号、查询结果、日志都只存在你这台电脑的浏览器里。唯一联网的是“共享名单”，只下载审核过的公司名单，以及你主动提交的标注。<br />
+        ·
+        想退出时，到对应网站点“退出登录”即可，插件不会替你退出，也不会替你登录。
+      </div>
+
+      <div class="card">
+        <b>怎么用？</b>
+        <ol class="steps">
+          <li>点某个网站的 <b>去登录</b>，在打开的网站页面里正常登录</li>
+          <li>回到这里点 <b>测试查询</b>，用一个常见型号试查一次</li>
+          <li>显示“可以查到库存”就说明插件能正常读取了</li>
+        </ol>
+        <div class="row" style="margin-top: 8px">
+          <span>测试用型号</span>
+          <input id="testPn" value="STM32F103C8T6" style="width: 200px" />
+        </div>
+      </div>
+
+      <div id="sites"></div>
+    </div>
+    <script src="build.js"></script>
+    <script src="accounts.js"></script>
+  </body>
+</html>
